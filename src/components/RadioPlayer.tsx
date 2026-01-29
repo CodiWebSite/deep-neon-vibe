@@ -83,13 +83,13 @@ const RadioPlayer = () => {
         {/* Station info */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Radio className="w-5 h-5 text-primary" />
+            <Radio className="w-5 h-5 text-party-gold" />
             <span className="text-sm text-muted-foreground uppercase tracking-wider">
-              Now Streaming
+              🎂 Birthday Special 🎂
             </span>
           </div>
           <h2 className="text-lg md:text-xl font-medium text-foreground/80">
-            Afro & Deep House
+            Party & Manele Mix
           </h2>
         </div>
 
