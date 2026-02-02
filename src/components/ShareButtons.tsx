@@ -5,7 +5,7 @@ const ShareButtons = () => {
   const [copied, setCopied] = useState(false);
   
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
-  const shareText = "🎉 Ascultă Deep Funky Radio - Birthday Party Mix! 🎂🎧";
+  const shareText = "🎧 Ascultă Deep Funky Radio - Afro & Deep House Mix Live 24/7!";
 
   const shareLinks = [
     {
@@ -43,9 +43,9 @@ const ShareButtons = () => {
       <div className="glass-card rounded-2xl p-5">
         {/* Header */}
         <div className="flex items-center justify-center gap-2 mb-4">
-          <Share2 className="w-4 h-4 text-party-gold" />
+          <Share2 className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground/80 uppercase tracking-wider">
-            Share the Party
+            Share
           </span>
         </div>
 
@@ -69,8 +69,8 @@ const ShareButtons = () => {
             onClick={copyToClipboard}
             className={`p-3 rounded-xl transition-all duration-300 ${
               copied 
-                ? "bg-party-gold/20 text-party-gold" 
-                : "bg-muted/30 text-muted-foreground hover:bg-party-gold/20 hover:text-party-gold"
+                ? "bg-primary/20 text-primary" 
+                : "bg-muted/30 text-muted-foreground hover:bg-primary/20 hover:text-primary"
             }`}
             aria-label="Copy link"
           >
@@ -84,8 +84,8 @@ const ShareButtons = () => {
 
         {/* Copied feedback */}
         {copied && (
-          <p className="text-center text-xs text-party-gold mt-3 animate-pulse">
-            Link copiat! 🎉
+          <p className="text-center text-xs text-primary mt-3 animate-pulse">
+            Link copiat!
           </p>
         )}
       </div>
