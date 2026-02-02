@@ -3,6 +3,7 @@ import RadioPlayer from "@/components/RadioPlayer";
 import BackgroundEffects from "@/components/BackgroundEffects";
 import ProgramSchedule from "@/components/ProgramSchedule";
 import ShareButtons from "@/components/ShareButtons";
+import SocialLinks from "@/components/SocialLinks";
 
 const Index = () => {
   return (
@@ -18,6 +19,9 @@ const Index = () => {
 
         {/* Program Schedule */}
         <ProgramSchedule />
+
+        {/* Social Links */}
+        <SocialLinks />
 
         {/* Share Buttons */}
         <ShareButtons />
