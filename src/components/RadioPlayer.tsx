@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, Radio } from "lucide-react";
+import { Play, Pause, Radio, Music, PartyPopper } from "lucide-react";
 import LiveIndicator from "./LiveIndicator";
 import VolumeSlider from "./VolumeSlider";
 import AudioVisualizer from "./AudioVisualizer";
@@ -11,6 +11,7 @@ const RadioPlayer = () => {
   const [volume, setVolume] = useState(75);
   const [isMuted, setIsMuted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentHour, setCurrentHour] = useState(new Date().getHours());
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -24,6 +25,18 @@ const RadioPlayer = () => {
       }
     };
   }, []);
+
+  // Update current hour every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHour(new Date().getHours());
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Party time is 20:00 - 05:00
+  const isPartyTime = currentHour >= 20 || currentHour < 5;
 
   useEffect(() => {
     if (audioRef.current) {
@@ -83,13 +96,17 @@ const RadioPlayer = () => {
         {/* Station info */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Radio className="w-5 h-5 text-primary" />
+            {isPartyTime ? (
+              <PartyPopper className="w-5 h-5 text-secondary" />
+            ) : (
+              <Music className="w-5 h-5 text-primary" />
+            )}
             <span className="text-sm text-muted-foreground uppercase tracking-wider">
               Streaming Live
             </span>
           </div>
           <h2 className="text-lg md:text-xl font-medium text-foreground/80">
-            Afro & Deep House Mix
+            {isPartyTime ? "Party & Manele Mix" : "Afro & Deep House"}
           </h2>
         </div>
 
