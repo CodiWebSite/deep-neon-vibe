@@ -4,6 +4,7 @@ import BackgroundEffects from "@/components/BackgroundEffects";
 import Confetti from "@/components/Confetti";
 import BirthdayBanner from "@/components/BirthdayBanner";
 import ProgramSchedule from "@/components/ProgramSchedule";
+import ShareButtons from "@/components/ShareButtons";
 
 const Index = () => {
   return (
@@ -23,6 +24,9 @@ const Index = () => {
 
         {/* Program Schedule */}
         <ProgramSchedule />
+
+        {/* Share Buttons */}
+        <ShareButtons />
 
         {/* Footer */}
         <footer className="text-center">
