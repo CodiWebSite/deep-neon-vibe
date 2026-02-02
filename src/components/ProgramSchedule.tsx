@@ -20,7 +20,7 @@ const ProgramSchedule = () => {
       <div className="glass-card rounded-2xl p-5">
         {/* Header */}
         <div className="flex items-center justify-center gap-2 mb-4">
-          <Clock className="w-4 h-4 text-party-gold" />
+          <Clock className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground/80 uppercase tracking-wider">
             Program
           </span>
@@ -32,28 +32,28 @@ const ProgramSchedule = () => {
           <div
             className={`relative rounded-xl p-4 transition-all duration-300 ${
               isPartyTime
-                ? "bg-gradient-to-r from-party-gold/20 to-party-pink/20 border border-party-gold/30"
+                ? "bg-gradient-to-r from-secondary/20 to-primary/20 border border-secondary/30"
                 : "bg-muted/30"
             }`}
           >
             {isPartyTime && (
               <div className="absolute top-2 right-2">
-                <span className="flex items-center gap-1 text-xs bg-party-gold/20 text-party-gold px-2 py-0.5 rounded-full">
-                  <span className="w-1.5 h-1.5 bg-party-gold rounded-full animate-pulse" />
+                <span className="flex items-center gap-1 text-xs bg-secondary/20 text-secondary px-2 py-0.5 rounded-full">
+                  <span className="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse" />
                   ACUM
                 </span>
               </div>
             )}
             <div className="flex items-start gap-3">
-              <div className={`p-2 rounded-lg ${isPartyTime ? "bg-party-gold/20" : "bg-muted/50"}`}>
-                <PartyPopper className={`w-5 h-5 ${isPartyTime ? "text-party-gold" : "text-muted-foreground"}`} />
+              <div className={`p-2 rounded-lg ${isPartyTime ? "bg-secondary/20" : "bg-muted/50"}`}>
+                <PartyPopper className={`w-5 h-5 ${isPartyTime ? "text-secondary" : "text-muted-foreground"}`} />
               </div>
               <div className="flex-1">
                 <div className={`text-sm font-semibold ${isPartyTime ? "text-foreground" : "text-muted-foreground"}`}>
                   20:00 - 05:00
                 </div>
                 <div className={`text-xs ${isPartyTime ? "text-foreground/70" : "text-muted-foreground/70"}`}>
-                  🎉 Manele • Party Mix • Club Hits
+                  Manele • Party Mix • Club Hits
                 </div>
               </div>
             </div>
@@ -84,7 +84,7 @@ const ProgramSchedule = () => {
                   05:00 - 20:00
                 </div>
                 <div className={`text-xs ${!isPartyTime ? "text-foreground/70" : "text-muted-foreground/70"}`}>
-                  🎧 Afro House • Deep House • Chill Vibes
+                  Afro House • Deep House • Chill Vibes
                 </div>
               </div>
             </div>

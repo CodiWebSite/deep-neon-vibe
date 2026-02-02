@@ -1,17 +1,17 @@
 const BackgroundEffects = () => {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {/* Party gradient orbs */}
+      {/* Neon gradient orbs */}
       <div
         className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full opacity-25 blur-3xl animate-float"
         style={{
-          background: "radial-gradient(circle, hsl(45 100% 60% / 0.5) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(180 100% 50% / 0.5) 0%, transparent 70%)",
         }}
       />
       <div
         className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-20 blur-3xl animate-float"
         style={{
-          background: "radial-gradient(circle, hsl(340 100% 65% / 0.5) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(320 100% 60% / 0.5) 0%, transparent 70%)",
           animationDelay: "-3s",
         }}
       />
@@ -19,14 +19,6 @@ const BackgroundEffects = () => {
         className="absolute top-[40%] right-[20%] w-[300px] h-[300px] rounded-full opacity-15 blur-3xl animate-breathe"
         style={{
           background: "radial-gradient(circle, hsl(280 100% 60% / 0.4) 0%, transparent 70%)",
-        }}
-      />
-      {/* Extra party glow */}
-      <div
-        className="absolute top-[20%] left-[30%] w-[400px] h-[400px] rounded-full opacity-10 blur-3xl animate-breathe"
-        style={{
-          background: "radial-gradient(circle, hsl(180 100% 50% / 0.3) 0%, transparent 70%)",
-          animationDelay: "-1.5s",
         }}
       />
 
