@@ -4,6 +4,7 @@ import BackgroundEffects from "@/components/BackgroundEffects";
 import ProgramSchedule from "@/components/ProgramSchedule";
 import ShareButtons from "@/components/ShareButtons";
 import SocialLinks from "@/components/SocialLinks";
+import InstallGuide from "@/components/InstallGuide";
 
 const Index = () => {
   return (
@@ -25,6 +26,9 @@ const Index = () => {
 
         {/* Share Buttons */}
         <ShareButtons />
+
+        {/* Install Guide */}
+        <InstallGuide />
 
         {/* Footer */}
         <footer className="text-center">
