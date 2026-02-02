@@ -3,6 +3,7 @@ import RadioPlayer from "@/components/RadioPlayer";
 import BackgroundEffects from "@/components/BackgroundEffects";
 import Confetti from "@/components/Confetti";
 import BirthdayBanner from "@/components/BirthdayBanner";
+import ProgramSchedule from "@/components/ProgramSchedule";
 
 const Index = () => {
   return (
@@ -19,6 +20,9 @@ const Index = () => {
 
         {/* Player */}
         <RadioPlayer />
+
+        {/* Program Schedule */}
+        <ProgramSchedule />
 
         {/* Footer */}
         <footer className="text-center">
