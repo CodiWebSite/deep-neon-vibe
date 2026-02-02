@@ -11,7 +11,7 @@ const ShareButtons = () => {
     {
       name: "Facebook",
       icon: Facebook,
-      url: "https://www.facebook.com/profile.php?id=61581120148505",
+      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
       color: "hover:bg-[#1877F2]/20 hover:text-[#1877F2]",
     },
     {
