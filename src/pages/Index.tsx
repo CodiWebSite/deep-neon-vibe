@@ -5,6 +5,7 @@ import ProgramSchedule from "@/components/ProgramSchedule";
 import ShareButtons from "@/components/ShareButtons";
 import SocialLinks from "@/components/SocialLinks";
 import InstallGuide from "@/components/InstallGuide";
+import MyTunerBadge from "@/components/MyTunerBadge";
 
 const Index = () => {
   return (
@@ -26,6 +27,9 @@ const Index = () => {
 
         {/* Share Buttons */}
         <ShareButtons />
+
+        {/* MyTuner Badge */}
+        <MyTunerBadge />
 
         {/* Install Guide */}
         <InstallGuide />
