@@ -1,5 +1,5 @@
 import Logo from "@/components/Logo";
-import RadioPlayer from "@/components/RadioPlayer";
+import MyTunerPlayer from "@/components/MyTunerPlayer";
 import BackgroundEffects from "@/components/BackgroundEffects";
 import ProgramSchedule from "@/components/ProgramSchedule";
 import ShareButtons from "@/components/ShareButtons";
@@ -17,7 +17,7 @@ const Index = () => {
         <Logo />
 
         {/* Player */}
-        <RadioPlayer />
+        <MyTunerPlayer />
 
         {/* Program Schedule */}
         <ProgramSchedule />
