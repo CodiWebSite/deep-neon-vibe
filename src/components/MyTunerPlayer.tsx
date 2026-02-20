@@ -11,20 +11,9 @@ const MyTunerPlayer = () => {
   const [volume, setVolume] = useState(75);
   const [isMuted, setIsMuted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [currentHour, setCurrentHour] = useState(new Date().getHours());
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    audioRef.current = new Audio(STREAM_URL);
-    audioRef.current.volume = volume / 100;
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
-  }, []);
 
   // Update current hour every minute
   useEffect(() => {
@@ -45,21 +34,40 @@ const MyTunerPlayer = () => {
   }, [volume, isMuted]);
 
   const togglePlay = async () => {
-    if (!audioRef.current) return;
-
     if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      setIsLoading(true);
-      try {
-        await audioRef.current.play();
-        setIsPlaying(true);
-      } catch (error) {
-        console.error("Playback failed:", error);
-      } finally {
-        setIsLoading(false);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+        audioRef.current = null;
       }
+      setIsPlaying(false);
+      return;
+    }
+
+    setIsLoading(true);
+    setHasError(false);
+
+    // Creat sincron în contextul click-ului — obligatoriu pentru iOS Safari și Android Chrome
+    const audio = new Audio(STREAM_URL);
+    audio.volume = isMuted ? 0 : volume / 100;
+    audioRef.current = audio;
+
+    try {
+      await audio.play();
+      setIsPlaying(true);
+    } catch {
+      // Fallback: încearcă cu mute
+      try {
+        audio.muted = true;
+        await audio.play();
+        setIsMuted(true);
+        setIsPlaying(true);
+      } catch {
+        setHasError(true);
+        audioRef.current = null;
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -132,6 +140,15 @@ const MyTunerPlayer = () => {
           <div className="mb-6">
             <AudioVisualizer isPlaying={isPlaying} />
           </div>
+
+          {/* Error message */}
+          {hasError && (
+            <div className="mb-4 px-3 py-2 rounded-xl bg-destructive/10 border border-destructive/30 text-center">
+              <p className="text-xs text-destructive">
+                Nu s-a putut porni stream-ul. Verifică conexiunea și încearcă din nou.
+              </p>
+            </div>
+          )}
 
           {/* Controls */}
           <div className="flex items-center gap-4">
