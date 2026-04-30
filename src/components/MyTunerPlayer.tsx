@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, Volume2, VolumeX, Radio, Music, PartyPopper } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Radio, Music, PartyPopper, Sparkles } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import LiveIndicator from "./LiveIndicator";
 import AudioVisualizer from "./AudioVisualizer";
@@ -24,8 +24,19 @@ const MyTunerPlayer = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Party time is 20:00 - 05:00
-  const isPartyTime = currentHour >= 20 || currentHour < 5;
+  // Slot curent
+  const slot: "deep" | "popcorn" | "party" =
+    currentHour >= 20 || currentHour < 5
+      ? "party"
+      : currentHour >= 18
+      ? "popcorn"
+      : "deep";
+
+  const slotInfo = {
+    deep: { label: "Afro & Deep House", Icon: Music, color: "text-primary" },
+    popcorn: { label: "Popcorn Music Mix", Icon: Sparkles, color: "text-accent" },
+    party: { label: "Party & Manele Mix", Icon: PartyPopper, color: "text-secondary" },
+  }[slot];
 
   useEffect(() => {
     if (audioRef.current) {
@@ -115,11 +126,7 @@ const MyTunerPlayer = () => {
           <div className="flex items-center gap-4 mb-6">
             {/* Logo/Icon */}
             <div className="relative w-16 h-16 rounded-xl bg-gradient-to-br from-primary/30 to-secondary/30 flex items-center justify-center border border-border/50">
-              {isPartyTime ? (
-                <PartyPopper className="w-8 h-8 text-secondary" />
-              ) : (
-                <Music className="w-8 h-8 text-primary" />
-              )}
+              <slotInfo.Icon className={`w-8 h-8 ${slotInfo.color}`} />
               {isPlaying && (
                 <div className="absolute inset-0 rounded-xl animate-pulse-glow" />
               )}
@@ -131,7 +138,7 @@ const MyTunerPlayer = () => {
                 Deep Funky Radio
               </h2>
               <p className="text-sm text-muted-foreground">
-                {isPartyTime ? "Party & Manele Mix" : "Afro & Deep House"}
+                {slotInfo.label}
               </p>
             </div>
           </div>
