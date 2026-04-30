@@ -1,5 +1,80 @@
-import { Clock, Music, PartyPopper } from "lucide-react";
+import { Clock, Music, PartyPopper, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
+
+type Slot = {
+  id: string;
+  name: string;
+  startHour: number;
+  endHour: number;
+  description: string;
+  icon: typeof Music;
+  accent: "primary" | "secondary" | "accent";
+};
+
+const SLOTS: Slot[] = [
+  {
+    id: "deepfunky",
+    name: "DeePFunkyALL",
+    startHour: 5,
+    endHour: 18,
+    description: "Afro House • Deep House • Chill Vibes",
+    icon: Music,
+    accent: "primary",
+  },
+  {
+    id: "popcorn",
+    name: "PopcornMusic",
+    startHour: 18,
+    endHour: 20,
+    description: "Hituri Pop • Dance • Feel Good",
+    icon: Sparkles,
+    accent: "accent",
+  },
+  {
+    id: "party",
+    name: "Party",
+    startHour: 20,
+    endHour: 5,
+    description: "Manele • Party Mix • Club Hits",
+    icon: PartyPopper,
+    accent: "secondary",
+  },
+];
+
+const isSlotActive = (slot: Slot, hour: number) => {
+  if (slot.startHour < slot.endHour) {
+    return hour >= slot.startHour && hour < slot.endHour;
+  }
+  // overnight (e.g. 20 -> 5)
+  return hour >= slot.startHour || hour < slot.endHour;
+};
+
+const formatRange = (slot: Slot) =>
+  `${String(slot.startHour).padStart(2, "0")}:00 - ${String(slot.endHour).padStart(2, "0")}:00`;
+
+const accentClasses = {
+  primary: {
+    bgActive: "bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30",
+    iconBg: "bg-primary/20",
+    iconColor: "text-primary",
+    badgeBg: "bg-primary/20 text-primary",
+    badgeDot: "bg-primary",
+  },
+  secondary: {
+    bgActive: "bg-gradient-to-r from-secondary/20 to-primary/20 border border-secondary/30",
+    iconBg: "bg-secondary/20",
+    iconColor: "text-secondary",
+    badgeBg: "bg-secondary/20 text-secondary",
+    badgeDot: "bg-secondary",
+  },
+  accent: {
+    bgActive: "bg-gradient-to-r from-accent/20 to-primary/20 border border-accent/30",
+    iconBg: "bg-accent/20",
+    iconColor: "text-accent",
+    badgeBg: "bg-accent/20 text-accent",
+    badgeDot: "bg-accent",
+  },
+};
 
 const ProgramSchedule = () => {
   const [currentHour, setCurrentHour] = useState(new Date().getHours());
@@ -7,18 +82,14 @@ const ProgramSchedule = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHour(new Date().getHours());
-    }, 60000); // Update every minute
+    }, 60000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Party time is 20:00 - 05:00
-  const isPartyTime = currentHour >= 20 || currentHour < 5;
-
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="glass-card rounded-2xl p-5">
-        {/* Header */}
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground/80 uppercase tracking-wider">
@@ -26,69 +97,43 @@ const ProgramSchedule = () => {
           </span>
         </div>
 
-        {/* Schedule items */}
         <div className="space-y-3">
-          {/* Party Time Slot */}
-          <div
-            className={`relative rounded-xl p-4 transition-all duration-300 ${
-              isPartyTime
-                ? "bg-gradient-to-r from-secondary/20 to-primary/20 border border-secondary/30"
-                : "bg-muted/30"
-            }`}
-          >
-            {isPartyTime && (
-              <div className="absolute top-2 right-2">
-                <span className="flex items-center gap-1 text-xs bg-secondary/20 text-secondary px-2 py-0.5 rounded-full">
-                  <span className="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse" />
-                  ACUM
-                </span>
-              </div>
-            )}
-            <div className="flex items-start gap-3">
-              <div className={`p-2 rounded-lg ${isPartyTime ? "bg-secondary/20" : "bg-muted/50"}`}>
-                <PartyPopper className={`w-5 h-5 ${isPartyTime ? "text-secondary" : "text-muted-foreground"}`} />
-              </div>
-              <div className="flex-1">
-                <div className={`text-sm font-semibold ${isPartyTime ? "text-foreground" : "text-muted-foreground"}`}>
-                  20:00 - 05:00
-                </div>
-                <div className={`text-xs ${isPartyTime ? "text-foreground/70" : "text-muted-foreground/70"}`}>
-                  Manele • Party Mix • Club Hits
-                </div>
-              </div>
-            </div>
-          </div>
+          {SLOTS.map((slot) => {
+            const active = isSlotActive(slot, currentHour);
+            const styles = accentClasses[slot.accent];
+            const Icon = slot.icon;
 
-          {/* Chill Time Slot */}
-          <div
-            className={`relative rounded-xl p-4 transition-all duration-300 ${
-              !isPartyTime
-                ? "bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30"
-                : "bg-muted/30"
-            }`}
-          >
-            {!isPartyTime && (
-              <div className="absolute top-2 right-2">
-                <span className="flex items-center gap-1 text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full">
-                  <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-                  ACUM
-                </span>
-              </div>
-            )}
-            <div className="flex items-start gap-3">
-              <div className={`p-2 rounded-lg ${!isPartyTime ? "bg-primary/20" : "bg-muted/50"}`}>
-                <Music className={`w-5 h-5 ${!isPartyTime ? "text-primary" : "text-muted-foreground"}`} />
-              </div>
-              <div className="flex-1">
-                <div className={`text-sm font-semibold ${!isPartyTime ? "text-foreground" : "text-muted-foreground"}`}>
-                  05:00 - 20:00
+            return (
+              <div
+                key={slot.id}
+                className={`relative rounded-xl p-4 transition-all duration-300 ${
+                  active ? styles.bgActive : "bg-muted/30"
+                }`}
+              >
+                {active && (
+                  <div className="absolute top-2 right-2">
+                    <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${styles.badgeBg}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${styles.badgeDot}`} />
+                      ACUM
+                    </span>
+                  </div>
+                )}
+                <div className="flex items-start gap-3">
+                  <div className={`p-2 rounded-lg ${active ? styles.iconBg : "bg-muted/50"}`}>
+                    <Icon className={`w-5 h-5 ${active ? styles.iconColor : "text-muted-foreground"}`} />
+                  </div>
+                  <div className="flex-1">
+                    <div className={`text-sm font-semibold ${active ? "text-foreground" : "text-muted-foreground"}`}>
+                      {formatRange(slot)} • {slot.name}
+                    </div>
+                    <div className={`text-xs ${active ? "text-foreground/70" : "text-muted-foreground/70"}`}>
+                      {slot.description}
+                    </div>
+                  </div>
                 </div>
-                <div className={`text-xs ${!isPartyTime ? "text-foreground/70" : "text-muted-foreground/70"}`}>
-                  Afro House • Deep House • Chill Vibes
-                </div>
               </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>
