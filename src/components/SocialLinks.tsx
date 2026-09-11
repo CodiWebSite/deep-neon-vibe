@@ -6,9 +6,9 @@ const SocialLinks = () => {
       <div className="glass-card rounded-2xl p-5">
         {/* Header */}
         <div className="flex items-center justify-center gap-2 mb-4">
-          <span className="text-sm font-medium text-foreground/80 uppercase tracking-wider">
+          <h2 className="text-sm font-medium text-foreground/80 uppercase tracking-wider">
             Urmărește-ne
-          </span>
+          </h2>
         </div>
 
         {/* Social links */}

@@ -163,6 +163,7 @@ const MyTunerPlayer = () => {
             <button
               onClick={togglePlay}
               disabled={isLoading}
+              aria-label={isPlaying ? "Oprește redarea" : "Pornește redarea live"}
               className={`relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
                 isPlaying
                   ? "bg-gradient-to-br from-primary to-secondary neon-glow"
@@ -194,6 +195,7 @@ const MyTunerPlayer = () => {
             <div className="flex items-center gap-3 flex-1">
               <button
                 onClick={toggleMute}
+                aria-label={isMuted || volume === 0 ? "Activează sunetul" : "Oprește sunetul"}
                 className="p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-primary"
               >
                 {isMuted || volume === 0 ? (
