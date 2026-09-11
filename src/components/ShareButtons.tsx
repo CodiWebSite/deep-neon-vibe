@@ -44,9 +44,9 @@ const ShareButtons = () => {
         {/* Header */}
         <div className="flex items-center justify-center gap-2 mb-4">
           <Share2 className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium text-foreground/80 uppercase tracking-wider">
+          <h2 className="text-sm font-medium text-foreground/80 uppercase tracking-wider">
             Share
-          </span>
+          </h2>
         </div>
 
         {/* Share buttons */}

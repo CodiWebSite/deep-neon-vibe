@@ -92,9 +92,9 @@ const ProgramSchedule = () => {
       <div className="glass-card rounded-2xl p-5">
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium text-foreground/80 uppercase tracking-wider">
+          <h2 className="text-sm font-medium text-foreground/80 uppercase tracking-wider">
             Program
-          </span>
+          </h2>
         </div>
 
         <div className="space-y-3">
