@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, Volume2, VolumeX, Radio, Music, PartyPopper, Sparkles } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Radio, Music } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import LiveIndicator from "./LiveIndicator";
 import AudioVisualizer from "./AudioVisualizer";
@@ -12,31 +12,13 @@ const MyTunerPlayer = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [currentHour, setCurrentHour] = useState(new Date().getHours());
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Update current hour every minute
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHour(new Date().getHours());
-    }, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Slot curent
-  const slot: "deep" | "popcorn" | "party" =
-    currentHour >= 20 || currentHour < 5
-      ? "party"
-      : currentHour >= 18
-      ? "popcorn"
-      : "deep";
-
   const slotInfo = {
-    deep: { label: "Afro & Deep House", Icon: Music, color: "text-primary" },
-    popcorn: { label: "Popcorn Music Mix", Icon: Sparkles, color: "text-accent" },
-    party: { label: "Party & Manele Mix", Icon: PartyPopper, color: "text-secondary" },
-  }[slot];
+    label: "Afro & Deep House • Non-stop",
+    Icon: Music,
+    color: "text-primary",
+  };
 
   useEffect(() => {
     if (audioRef.current) {

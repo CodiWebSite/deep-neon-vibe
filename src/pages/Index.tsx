@@ -17,8 +17,8 @@ const Index = () => {
         <Logo />
 
         <p className="max-w-lg text-center text-sm text-muted-foreground">
-          Radio house online, live 24/7 din România: Afro House și Deep House ziua,
-          party mix și manele seara. Apasă play și ascultă gratuit, direct din browser.
+          Radio house online, live 24/7 din România: Afro House și Deep House
+          non-stop. Apasă play și ascultă gratuit, direct din browser.
         </p>
 
         {/* Player */}
