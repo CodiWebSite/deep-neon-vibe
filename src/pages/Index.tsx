@@ -6,6 +6,7 @@ import ShareButtons from "@/components/ShareButtons";
 import SocialLinks from "@/components/SocialLinks";
 import InstallGuide from "@/components/InstallGuide";
 import MyTunerBadge from "@/components/MyTunerBadge";
+import ChristmasRadio from "@/components/ChristmasRadio";
 
 const Index = () => {
   return (
@@ -35,6 +36,9 @@ const Index = () => {
 
         {/* MyTuner Badge */}
         <MyTunerBadge />
+
+        {/* Christmas Radio */}
+        <ChristmasRadio />
 
         {/* Install Guide */}
         <InstallGuide />
